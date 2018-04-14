@@ -1,46 +1,29 @@
-var Letter = require("./Letter.js");
+//index calls word list for a random word
+//index calls word(newWord)
+//word calls new Letter for each letter in newWord
+//Letter creates an object with the letter and isGuessed:false for each letter
 
-var Word = function(word, letters) {
-	this.word = word;
-	this.letters = [];
-	this.finishedWord = false;
+//based on guess index does the thing, changes the values
 
-	this.ltrArr = function() {
-		for (var i=0; i< this.word.length; i++) {
-			var newLetter = new Letter(this.word[i]);
-			this.letters.push(newLetter);
+
+
+var Letter = function(letter){
+	this.letter = letter;
+	this.isGuessed = false;
+
+	this.check = function() {
+		if (userGuess == this.letter) {
+			this.isGuessed = true
 		}
 	}
 
-	this.wordCheck = function() {
-		this.wrdchk = this.letters.every(function(currentLtr) {
-			return currentLtr.appear;
-		});
-			this.finishedWord = true;
-			return true;
-	};
-
-	this.checkLetter = function(guessedLtr) {
-		var count = 0;
-
-		this.letters.forEach(function(currentLtr) {
-			if (currentLtr.letter == guessedLtr) {
-				this.letters[i].appear = true;
-				count++;
-			}
-		})
-		return count;
-	};
-
-	this.wordDisplay = function() {
-		var display = "";
-
-		this.letters.forEach(function(lettr) {
-			var ltrNow = currentLtr.letterDisplay()
-			display += ltrNow;
-		})
-		return display;
+	this.letterAppear = function() {
+		if (this.isGuessed) {
+  			return " _";
+		} else {
+			return this.letter
+		}
 	}
 }
 
-module.exports = Word;
+module.exports = Letter
